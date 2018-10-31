@@ -2,12 +2,20 @@ const fetch = require('node-fetch');
 const Botkit = require('./node_modules/botkit/lib/Botkit.js');
 const moment = require('moment');
 const duration = require("moment-duration-format");
+require('dotenv').config()
+
+
+if (!process.env.SLACK_TOKEN) {
+    console.log('Error: Specify SLACK_TOKEN in environment');
+    process.exit(1);
+}
+
 
 //time doctor api params
 // let start_date = '2018-10-01';
 // let end_date = '2018-10-02';
 const company_id = '297294';
-const access_token = 'M2IwNjFlMjc4YTI4YmY1MzVhNDA5YzRhOTE5ODQwNzIwZmU3OTM3NWNmMjA2OWRhNWJhNDlhMjEwODlmYzlmMw';
+const access_token = process.env.access_token;
 // 
 
 
@@ -16,7 +24,7 @@ var controller = Botkit.slackbot({
 });
 
 var bot = controller.spawn({
-    token: 'xoxb-2178085279-468079467107-Hdu4GQ6KdgAYfrBF5KwFbOqO'
+    token: process.env.SLACK_TOKEN
 }).startRTM();
 
 
